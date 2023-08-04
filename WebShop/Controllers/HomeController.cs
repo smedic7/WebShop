@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebShop.Models;
 
@@ -18,10 +19,24 @@ namespace WebShop.Controllers
             return View();
         }
 
+
+
+        [Authorize]
+
         public IActionResult Privacy()
         {
             return View();
         }
+
+
+        public IActionResult Product()
+        {
+            return View();
+        }
+
+
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
