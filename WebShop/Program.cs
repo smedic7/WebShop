@@ -62,9 +62,39 @@ namespace WebShop
             app.UseAuthentication();
             app.UseAuthorization();
 
+            using (var scope = app.Services.CreateAsyncScope())
+            {
+
+                var userManager = (UserManager<ApplicationUser>)scope.ServiceProvider.GetService(typeof(UserManager<ApplicationUser>));
+
+
+
+                ApplicationUserDbInitializer.SeedUsers(userManager);
+
+            }
+
+
+
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+            });
+
+
+
+
+
+
+
             app.MapRazorPages();
 
             app.Run();
