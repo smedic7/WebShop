@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebShop.Data;
+using WebShop.Models;
 
 namespace WebShop.Areas.Admin.Controllers
 {
@@ -32,7 +33,7 @@ namespace WebShop.Areas.Admin.Controllers
 
             if (id == 0)
             {
-                NotFound();
+                return NotFound();
             }
 
             var category = _dbContext.Category.FirstOrDefault(c => c.Id == id);
@@ -47,7 +48,65 @@ namespace WebShop.Areas.Admin.Controllers
         }
     
     
-    
-    
+        public IActionResult Create()
+        {
+
+            return View();
+        }
+
+        [HttpPost] 
+        public IActionResult Create(Category category)
+        {
+
+            if(ModelState.IsValid) 
+            
+            {
+
+                _dbContext.Category.Add(category);
+                _dbContext.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(category);
+
+          
+
+        }
+
+            public IActionResult Edit(int id)
+            {
+
+            if (id == 0)
+            {
+                return NotFound();
+            }
+
+                var category = _dbContext.Category.FirstOrDefault(c=>c.Id == id);
+
+                if(category == null)
+            {
+                return NotFound();
+            }
+
+            return View(category);
+            }
+
+
+            [HttpPost]
+            public IActionResult Edit(Category category)
+            {
+            if (ModelState.IsValid)
+            {
+                _dbContext.Update(category);
+                _dbContext.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+                return View(category);
+            }
+
+
+
     }
 }
