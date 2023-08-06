@@ -23,10 +23,10 @@ namespace WebShop.Models
         public decimal Price { get; set; }
 
         [ForeignKey("ProductId")]
-        public List<ProductCategory> ProductsCategories { get; set;}
+        public List<ProductCategory>? ProductsCategories { get; set;}
 
         [ForeignKey("ProductId")]
-        public List<OrderItem> OrderItems { get; set; }
+        public List<OrderItem>? OrderItems { get; set; }
 
 
 

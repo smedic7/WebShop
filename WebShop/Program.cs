@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
-
+using System.Globalization;
 using WebShop.Data;
 
 namespace WebShop
@@ -56,6 +57,25 @@ namespace WebShop
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            //decimalni setup
+            var cultureInfo = new CultureInfo("hr-HR");
+            cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
+            cultureInfo.NumberFormat.CurrencyDecimalSeparator = ".";
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+                
+                
+                {
+                    DefaultRequestCulture = new RequestCulture(cultureInfo),
+                    SupportedCultures = new List<CultureInfo> { cultureInfo },
+                    SupportedUICultures = new List<CultureInfo> { cultureInfo }
+
+
+                });
+
+
+
 
             app.UseRouting();
 

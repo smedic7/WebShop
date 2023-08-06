@@ -146,14 +146,14 @@ namespace WebShop.Areas.Admin.Controllers
                 return NotFound();
             }
             
-                return RedirectToAction("Index");
+               
             
         
                 _dbContext.Category.Remove(category);
 
                 _dbContext.SaveChanges();
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
          
             }
 
