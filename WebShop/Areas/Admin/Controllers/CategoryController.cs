@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebShop.Data;
 using WebShop.Models;
 
@@ -107,6 +108,54 @@ namespace WebShop.Areas.Admin.Controllers
             }
 
 
+
+            public IActionResult Delete(int id)
+            {
+                if(id == 0)
+                {
+                return NotFound();
+                }
+
+
+                var category = _dbContext.Category.FirstOrDefault(c => c.Id == id);
+
+                if(category == null)
+                {
+                return NotFound();
+                }
+
+             return View(category);
+        
+             }
+
+            
+            [HttpPost]            
+            
+            public IActionResult DeleteConfirm(int id)
+            {
+                if(id ==0)
+            {
+                return NotFound();
+            }
+            
+                var category= _dbContext.Category.FirstOrDefault(c => c.Id ==id);
+                
+                if(category == null)
+            {
+
+                return NotFound();
+            }
+            
+                return RedirectToAction("Index");
+            
+        
+                _dbContext.Category.Remove(category);
+
+                _dbContext.SaveChanges();
+
+            return RedirectToAction("Index");
+         
+            }
 
     }
 }
