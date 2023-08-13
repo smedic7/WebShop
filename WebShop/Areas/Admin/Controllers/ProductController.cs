@@ -160,34 +160,20 @@ namespace WebShop.Areas.Admin.Controllers
         }
 
         [HttpPost]
-
-
         public IActionResult DeleteConfirm(int id)
         {
-            if (id == 0)
-            {
-                return NotFound();
-            }
+            if (id == 0) return NotFound();
+            var product = _dbContext.Products.FirstOrDefault(p => p.Id == id);
 
+            if (product == null) return NotFound();
 
-            var product = _dbContext.Products.FirstOrDefault(p =>p.Id==id);
-
-            
-            if(product == null)
-            {
-
-                return NotFound();  
-            }
-            
-            
             _dbContext.Remove(product);
             _dbContext.SaveChanges();
 
-
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
-      
-        
+
+
 
 
     }
