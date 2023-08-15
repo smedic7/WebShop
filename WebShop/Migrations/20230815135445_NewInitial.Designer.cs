@@ -9,11 +9,11 @@ using WebShop.Data;
 
 #nullable disable
 
-namespace WebShop.Data.Migrations
+namespace WebShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230802111107_AddingNewModels")]
-    partial class AddingNewModels
+    [Migration("20230815135445_NewInitial")]
+    partial class NewInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,15 @@ namespace WebShop.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "7bf2d6e5-bf0f-4548-87f2-68350a27d214",
+                            ConcurrencyStamp = "e7538212-caaf-4777-9a42-dfc50c810472",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -271,8 +280,8 @@ namespace WebShop.Data.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -340,7 +349,6 @@ namespace WebShop.Data.Migrations
                         .HasColumnType("decimal(7,2)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -553,9 +561,7 @@ namespace WebShop.Data.Migrations
                 {
                     b.HasOne("WebShop.Data.ApplicationUser", null)
                         .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("WebShop.Models.OrderItem", b =>

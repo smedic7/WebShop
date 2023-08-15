@@ -127,8 +127,21 @@ namespace WebShop.Areas.Admin.Controllers
             return View(productCategory);
         }
 
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            if (id == 0) return NotFound();
+            var productCategory = _dbContext.ProductCategory.FirstOrDefault(p => p.Id == id);
 
-        //fali post za delete
+            if (productCategory == null) return NotFound();
+
+            _dbContext.ProductCategory.Remove(productCategory);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Index), new { productId = productCategory.ProductId });
+        }
+
+
 
 
         public IActionResult Edit(int id, int productId)

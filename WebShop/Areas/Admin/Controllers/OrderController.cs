@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using WebShop.Data;
 
 namespace WebShop.Areas.Admin.Controllers
 {
@@ -10,12 +11,18 @@ namespace WebShop.Areas.Admin.Controllers
 
     public class OrderController : Controller
     {
-        
 
+        private ApplicationDbContext _dbContext;
+
+            public OrderController(ApplicationDbContext dbContext)
+            {
+                _dbContext=dbContext;
+
+            }
 
         public IActionResult Index()
         {
-            return View();
+            return View(_dbContext.Order.ToList());
         }
     }
 }

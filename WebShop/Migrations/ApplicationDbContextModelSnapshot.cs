@@ -3,19 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebShop.Data;
 
 #nullable disable
 
-namespace WebShop.Data.Migrations
+namespace WebShop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230803132605_AddingAdminRoles")]
-    partial class AddingAdminRoles
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,8 +51,8 @@ namespace WebShop.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "24944323-b35c-4592-9d82-376e0895b489",
-                            ConcurrencyStamp = "c676c0f6-bbfc-4436-9c42-ae06e42ece37",
+                            Id = "7bf2d6e5-bf0f-4548-87f2-68350a27d214",
+                            ConcurrencyStamp = "e7538212-caaf-4777-9a42-dfc50c810472",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -280,8 +278,8 @@ namespace WebShop.Data.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -349,7 +347,6 @@ namespace WebShop.Data.Migrations
                         .HasColumnType("decimal(7,2)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -562,9 +559,7 @@ namespace WebShop.Data.Migrations
                 {
                     b.HasOne("WebShop.Data.ApplicationUser", null)
                         .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("WebShop.Models.OrderItem", b =>

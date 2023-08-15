@@ -58,11 +58,11 @@ namespace WebShop.Models
 
         public string Message { get; set; }
 
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
 
         [ForeignKey("OrderId")]
-        public List<OrderItem> OrderItems { get; set; }
+        public List<OrderItem>? OrderItems { get; set; }
 
 
 
