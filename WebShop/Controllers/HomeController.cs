@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebShop.Data;
 using WebShop.Models;
@@ -40,11 +41,11 @@ namespace WebShop.Controllers
         public IActionResult Product(int? categoryId)
         {
 
-            List<Product> products = new List<Product>();
+            List<Product> products = _dbContext.Products.ToList();
 
 
 
-            if(categoryId != null)
+            if (categoryId != null)
             {
                 products = (from product in _dbContext.Products
                             join pCat in _dbContext.ProductCategory on product.Id equals pCat.ProductId
@@ -76,7 +77,7 @@ namespace WebShop.Controllers
             }).ToList();
 
 
-            return View(_dbContext.Products.ToList());
+            return View(products);
         }
 
 

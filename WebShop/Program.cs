@@ -38,7 +38,7 @@
 
                 });
 
-
+                builder.Services.AddSession();
 
 
                 var app = builder.Build();
@@ -95,7 +95,7 @@
 
 
 
-
+            app.UseSession();
 
 
                 app.UseEndpoints(endpoints =>
