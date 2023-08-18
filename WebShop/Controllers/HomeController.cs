@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebShop.Data;
+using WebShop.Extensions;
 using WebShop.Models;
 
 namespace WebShop.Controllers
@@ -12,6 +13,7 @@ namespace WebShop.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        private readonly string _sessionKeyName = "_cart";
 
         private ApplicationDbContext _dbContext;
 
@@ -80,7 +82,35 @@ namespace WebShop.Controllers
             return View(products);
         }
 
+        public IActionResult Order()
+        {
 
+
+            List<CartItem> cartItems = HttpContext.Session.GetObjectAsJson<List<CartItem>>(_sessionKeyName);
+
+            if(cartItems == null)
+            {
+                cartItems= new List<CartItem>();
+            }
+        
+            if(cartItems.Count == 0) 
+            
+            
+            {
+
+                return RedirectToAction("Index");
+
+
+
+            }
+
+            decimal sum = 0;
+            ViewBag.TotalPrice = cartItems.Sum(item => sum += item.GetTotal());
+            
+            return View(cartItems);
+        
+        
+        }
 
 
 

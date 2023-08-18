@@ -165,18 +165,18 @@ namespace WebShop.Controllers
 
             if (productIndexToRemove != -1)
             {
-                // Decrease the quantity of the product in the cart
+                // smanjuje količinu ako je produkt u kosarici
                 if (cartItems[productIndexToRemove].Quantity > 1)
                 {
                     cartItems[productIndexToRemove].Quantity--;
                 }
                 else
                 {
-                    // Remove the item from the cart if its quantity becomes zero
+                    // briše item ako postane nula iz košarice
                     cartItems.RemoveAt(productIndexToRemove);
                 }
 
-                // Save the updated cart to the session
+                //sejva update cart
                 HttpContext.Session.SetObjectAsJson(_sessionKeyName, cartItems);
             }
 
