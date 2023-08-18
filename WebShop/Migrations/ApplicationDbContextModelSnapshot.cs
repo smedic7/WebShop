@@ -51,8 +51,8 @@ namespace WebShop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7bf2d6e5-bf0f-4548-87f2-68350a27d214",
-                            ConcurrencyStamp = "e7538212-caaf-4777-9a42-dfc50c810472",
+                            Id = "baed6924-e44b-4960-b74a-b1bffce5ffce",
+                            ConcurrencyStamp = "61f31c9f-2f7d-430f-8c7a-2f9f4e71616f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

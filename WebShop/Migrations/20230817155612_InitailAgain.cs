@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebShop.Migrations
 {
-    public partial class NewInitial : Migration
+    public partial class InitailAgain : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -349,7 +349,7 @@ namespace WebShop.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "7bf2d6e5-bf0f-4548-87f2-68350a27d214", "e7538212-caaf-4777-9a42-dfc50c810472", "Admin", "ADMIN" });
+                values: new object[] { "baed6924-e44b-4960-b74a-b1bffce5ffce", "61f31c9f-2f7d-430f-8c7a-2f9f4e71616f", "Admin", "ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

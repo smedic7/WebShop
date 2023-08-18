@@ -53,9 +53,9 @@
 
                     </td>
                     <td>@item.Product.Title</td>
-                    <td>@item.Product.Price</td>
+                    <td>@item.Product.Price.ToString("0.00")</td>
                     <td>@item.Quantity</td>
-                    <td>@item.GetTotal()</td>
+                    <td>@item.GetTotal().ToString("0.00")</td>
 
 
                 </tr>
@@ -75,7 +75,7 @@
                 <td></td>
                 <td>
 
-                    <strong>Total price: @ViewBag.TotalPrice</strong>
+                    <strong>Total price: @ViewBag.TotalPrice.ToString("0.00")</strong>
 
 
                 </td>
