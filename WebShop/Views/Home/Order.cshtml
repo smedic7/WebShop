@@ -1,92 +1,138 @@
 ﻿@model List<CartItem>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
 
-<div class="text-center">
-    <h1 class="display-h4">
-        Place your order
-    </h1>
-
-
-
-</div>
-
-
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-
-            <table class="table">
-
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-
-
-
-
-
-                    </tr>
-
-
-
-                </thead>
-                <tbody>
-
-                    @foreach (var item in Model)
-                    {
-
-                        <tr>
-                            <td>
-                                <a class="btn btn-sm btn-danger" asp-action="RemoveFromCart" asp-route-productId="@item.Product.Id">Remove</a>
-
-                            </td>
-                            <td>@item.Product.Title</td>
-                            <td>@item.Product.Price.ToString("0.00")</td>
-                            <td>@item.Quantity</td>
-                            <td>@item.GetTotal().ToString("0.00")</td>
-
-
-                        </tr>
-
-
-
-
-
-
-                    }
-
-                    <tr>
-
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-
-                            <strong>Total price: @ViewBag.TotalPrice.ToString("0.00")</strong>
-
-
-                        </td>
-
-
-
-
-                    </tr>
-
-
-
-
-                </tbody>
-
-            </table>
-
+    <div class="container mt-5">
+        <div class="text-center">
+            <h1 class="display-4">
+                Place your order
+            </h1>
         </div>
 
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <table class="table" style="font-weight: bold;">
+                    <thead>
+                        <tr style="border-bottom: none;">
+                            <th></th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a class="btn btn-sm btn-danger" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-productId="@item.Product.Id">Remove</a>
+                                </td>
+                                <td>@item.Product.Title</td>
+                                <td>@item.Product.Price.ToString("0.00")</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.GetTotal().ToString("0.00")</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="4" class="text-right"><strong>Total price:</strong></td>
+                            <td><strong>@ViewBag.TotalPrice.ToString("0.00")</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="text-center"><h2>Personal info</h2></div>
+                <form method="post" asp-controller="Home" asp-action="CreateOrder">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="BillingFirstName">First name</label>
+                            <input type="text" name="BillingFirstName" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="BillingLastName">Last name</label>
+                            <input type="text" name="BillingLastName" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="BillingEmail">Email address</label>
+                            <input type="email" name="BillingEmail" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="BillingPhone">Phone</label>
+                            <input type="text" name="BillingPhone" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="BillingAddress">Address</label>
+                        <input type="text" name="BillingAddress" class="form-control" />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="BillingCity">City</label>
+                            <input type="text" name="BillingCity" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="BillingCountry">Country</label>
+                            <select class="form-control" name="BillingCountry">
+                                <option value="Austria">Austria</option>
+                                <option value="Belgium">Belgium</option>
+                                       <option value="Austria">Austria</option>
+                                    <option value="Belgium">Belgium</option>
+                                    <option value="Bulgaria">Bulgaria</option>
+                                    <option value="Croatia">Croatia</option>
+                                    <option value="Cyprus">Cyprus</option>
+                                    <option value="Czech Republic">Czech Republic</option>
+                                    <option value="Denmark">Denmark</option>
+                                    <option value="Estonia">Estonia</option>
+                                    <option value="Finland">Finland</option>
+                                    <option value="France">France</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="Greece">Greece</option>
+                                    <option value="Hungary">Hungary</option>
+                                    <option value="Ireland">Ireland</option>
+                                    <option value="Italy">Italy</option>
+                                    <option value="Latvia">Latvia</option>
+                                    <option value="Lithuania">Lithuania</option>
+                                    <option value="Luxembourg">Luxembourg</option>
+                                    <option value="Malta">Malta</option>
+                                    <option value="Netherlands">Netherlands</option>
+                                    <option value="Poland">Poland</option>
+                                    <option value="Portugal">Portugal</option>
+                                    <option value="Romania">Romania</option>
+                                    <option value="Slovakia">Slovakia</option>
+                                    <option value="Slovenia">Slovenia</option>
+                                    <option value="Spain">Spain</option>
+                                    <option value="Sweden">Sweden</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="BillingZipCode">Postal code</label>
+                            <input type="text" class="form-control" name="BillingZipCode" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Message">Message</label>
+                        <textarea class="form-control" name="Message" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Place order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
+
+</body>
+</html>
+
