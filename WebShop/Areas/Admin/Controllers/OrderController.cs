@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using WebShop.Data;
+using WebShop.Models;
 
 namespace WebShop.Areas.Admin.Controllers
 {
@@ -14,27 +15,83 @@ namespace WebShop.Areas.Admin.Controllers
 
         private ApplicationDbContext _dbContext;
 
-            public OrderController(ApplicationDbContext dbContext)
-            {
-                _dbContext=dbContext;
+        public OrderController(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
 
-            }
+        }
 
         public IActionResult Index()
         {
-            return View(_dbContext.Order.ToList());
+            List<Order> orders = _dbContext.Order.ToList();
+            foreach (var order in orders)
+            {
+                order.OrderItems = (
+                    from orderItem in _dbContext.OrderItem
+                    where orderItem.Id == order.Id
+                    select new OrderItem
+                    {
+                        Total = orderItem.Total
+
+                    }).ToList();
+
+                foreach (var orderItem in order.OrderItems)
+                {
+                    order.Total += orderItem.Total;
+                }
+            }
+
+            return View(orders);
         }
-    
-    
-    
-    
-    
-        public IActionResult Details()
+
+
+
+
+
+        public IActionResult Details(int id)
         {
-            return View();
+
+            if (id == 0)
+            {
+                return NotFound();
+            }
+
+            var order = _dbContext.Order.FirstOrDefault(o => o.Id == id);
+
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+
+            order.OrderItems = (
+
+                from orderItem in _dbContext.OrderItem
+                where orderItem.Id == order.Id
+                select new OrderItem
+                {
+                    Id = orderItem.Id,
+                    OrderId = orderItem.OrderId,
+                    ProductId = orderItem.ProductId,
+                    Quantity = orderItem.Quantity,
+                    Total = orderItem.Total,
+
+                }
+
+
+
+                ).ToList();
+
+            foreach (var orderItem in order.OrderItems)
+            {
+                order.Total += orderItem.Total;
+            }
+
+            return View(order);
         }
-    
-    
-    
+
+
+
     }
 }

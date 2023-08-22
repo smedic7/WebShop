@@ -1,1 +1,130 @@
-﻿<h1>Order details</h1>
+﻿@model Order
+
+
+
+<h1>Order details</h1>
+
+<div>
+
+    <hr />
+    <table class="table">
+
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model =>model.BillingFirstName)
+                </th>
+
+                 <th>
+                    @Html.DisplayNameFor(model =>model.BillingLastName)
+                </th>
+                 <th>
+                    @Html.DisplayNameFor(model =>model.BillingEmail)
+                </th>
+                 <th>
+                    @Html.DisplayNameFor(model =>model.BillingPhone)
+                </th>
+                 <th>
+                    @Html.DisplayNameFor(model =>model.BillingAddress)
+                </th>
+                 <th>
+                    @Html.DisplayNameFor(model =>model.BillingCity)
+                </th>
+
+                     <th>
+                    @Html.DisplayNameFor(model =>model.BillingZipCode)
+                </th>
+                 <th>
+                    @Html.DisplayNameFor(model =>model.BillingCountry)
+                </th>
+
+            </tr>
+
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.BillingFirstName)
+
+                </td>
+
+                 <td>
+                    @Html.DisplayFor(model => model.BillingLastName)
+
+                </td>
+                 <td>
+                    @Html.DisplayFor(model => model.BillingEmail)
+
+                </td>
+                 <td>
+                    @Html.DisplayFor(model => model.BillingPhone)
+
+                </td>
+                 <td>
+                    @Html.DisplayFor(model => model.BillingAddress)
+
+                </td>
+                 <td>
+                    @Html.DisplayFor(model => model.BillingCity)
+
+                </td>
+                 <td>
+                    @Html.DisplayFor(model => model.BillingZipCode)
+
+                </td>
+                 <td>
+                    @Html.DisplayFor(model => model.BillingCountry)
+
+                </td>
+
+
+            </tr>
+
+
+
+        </tbody>
+
+
+    </table>
+
+
+    <dl class="row">
+        <dt class="col-md-2">
+
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+        <dd class="col-md-10">
+            @Html.DisplayFor(model =>model.Message)
+        </dd>
+          <dt class="col-md-2">
+
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd class="col-md-10">
+            @Html.DisplayFor(model =>model.DateCreated)
+        </dd>
+          <dt class="col-md-2">
+
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd class="col-md-10">
+            @Html.DisplayFor(model =>model.Total)
+        </dd>
+
+    </dl>
+
+        <hr />
+
+    <div>
+        <a asp-action="NewOrderItem" asp-route-orderId="@Model.Id">Add order item</a>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to order list</a>
+</div>
+
+</div>
