@@ -19,7 +19,7 @@
             <div class="col-md-12">
                 <table class="table" style="font-weight: bold;">
                     <thead>
-                        <tr style="border-bottom: none;">
+                        <tr>
                             <th></th>
                             <th>Product</th>
                             <th>Price</th>
@@ -51,7 +51,31 @@
 
         <div class="row mt-4">
             <div class="col-md-12">
-                <div class="text-center"><h2>Personal info</h2></div>
+                <div class="text-center">
+                    
+                    <h2>Personal info</h2>
+                    
+                    @if (ViewBag.Errors.Count > 0)
+                    
+                    {<div class="alert alert-danger text-center">
+                            @foreach(var error in ViewBag.Errors)
+                            {
+                                <p>@error</p>
+                            }
+                            </div>
+                       
+                    }
+                    
+                        
+                       
+
+                       
+                    
+
+                
+                
+                
+                </div>
                 <form method="post" asp-controller="Home" asp-action="CreateOrder">
                     <div class="form-row">
                         <div class="form-group col-md-6">

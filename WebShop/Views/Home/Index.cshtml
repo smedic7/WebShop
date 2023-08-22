@@ -6,3 +6,30 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+@if(TempData["Message"] != null)
+{
+    <div class="row text-center" >
+        <div class="col-md-12">
+            <div class="alert alert-warning" role="alert">
+                @TempData["Message"]
+                </div>
+        </div>
+
+    </div>
+
+}
+
+@if (TempData["OrderMsg"] != null)
+{
+    <div class="row text-center">
+        <div class="col-md-12">
+            <div class="alert alert-success" role="alert">
+                @TempData["OrderMsg"]
+            </div>
+        </div>
+
+    </div>
+
+}
