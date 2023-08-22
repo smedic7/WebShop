@@ -24,5 +24,17 @@ namespace WebShop.Areas.Admin.Controllers
         {
             return View(_dbContext.Order.ToList());
         }
+    
+    
+    
+    
+    
+        public IActionResult Details()
+        {
+            return View();
+        }
+    
+    
+    
     }
 }

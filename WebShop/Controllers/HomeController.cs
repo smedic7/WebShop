@@ -154,6 +154,8 @@ namespace WebShop.Controllers
                         Total=item.GetTotal(),  
                     };
 
+                    order.DateCreated= DateTime.Now;
+
                     _dbContext.OrderItem.Add(orderItem);
                     _dbContext.SaveChanges();
                 }

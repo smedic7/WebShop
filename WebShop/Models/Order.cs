@@ -10,7 +10,7 @@ namespace WebShop.Models
         public int Id { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateCreated { get; set; }
 
         [Required(ErrorMessage = "Total price is required!")]
