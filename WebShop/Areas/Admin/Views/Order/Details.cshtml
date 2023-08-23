@@ -119,12 +119,57 @@
 
         <hr />
 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    ProductId
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Total
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach(var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem=> item.ProductId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem=> item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem=> item.Total)
+                    </td>
+                </tr>
+                
+            }
+
+        </tbody>    
+    </table>
+
+
+
+
+
+
+
+
     <div>
-        <a asp-action="NewOrderItem" asp-route-orderId="@Model.Id">Add order item</a>
+        <a asp-action="NewOrderItem" asp-route-orderId="@Model.Id" class="btn btn-primary">Add order item</a>
+        <div style="margin-top: 5px;"></div>
 
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to order list</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary">Back to order list</a>
 </div>
 
 </div>

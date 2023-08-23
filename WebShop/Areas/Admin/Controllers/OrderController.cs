@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data;
 using WebShop.Data;
 using WebShop.Models;
@@ -92,6 +93,16 @@ namespace WebShop.Areas.Admin.Controllers
         }
 
 
+        public IActionResult Create()
+        {
 
+            ViewBag.Users = _dbContext.Users.Select(u => new SelectListItem()
+            {
+                Value = u.Id.ToString(),
+                Text = u.FirstName + " " + u.LastName,
+            }).ToList();
+            
+            return View();
+        }
     }
 }
