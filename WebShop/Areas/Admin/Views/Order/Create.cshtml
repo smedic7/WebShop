@@ -11,7 +11,7 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="DateCreated" class="control-label"></label>
-                <input asp-for="DateCreated" class="form-control" />                
+                <input asp-for="DateCreated" class="form-control" />
                 <span asp-validation-for="DateCreated" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -19,7 +19,51 @@
                 <input asp-for="Total" class="form-control" />
                 <span asp-validation-for="Total" class="text-danger"></span>
             </div>
-
+            <div class="form-group">
+                <label asp-for="BillingFirstName" class="control-label"></label>
+                <input asp-for="BillingFirstName" class="form-control" />
+                <span asp-validation-for="BillingFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingLastName" class="control-label"></label>
+                <input asp-for="BillingLastName" class="form-control" />
+                <span asp-validation-for="BillingLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingEmail" class="control-label"></label>
+                <input asp-for="BillingEmail" class="form-control" />
+                <span asp-validation-for="BillingEmail" class="text-danger"></span>
+            </div
+             <div class="form-group">
+                <label asp-for="BillingPhone" class="control-label"></label>
+                <input asp-for="BillingPhone" class="form-control" />
+                <span asp-validation-for="BillingPhone" class="text-danger"></span>
+            </div
+            <div class="form-group">
+                <label asp-for="BillingAddress" class="control-label"></label>
+                <input asp-for="BillingAddress" class="form-control" />
+                <span asp-validation-for="BillingAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingCity" class="control-label"></label>
+                <input asp-for="BillingCity" class="form-control" />
+                <span asp-validation-for="BillingCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingCountry" class="control-label"></label>
+                <input asp-for="BillingCountry" class="form-control" />
+                <span asp-validation-for="BillingCountry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingZipCode" class="control-label"></label>
+                <input asp-for="BillingZipCode" class="form-control" />
+                <span asp-validation-for="BillingZipCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                <input asp-for="Message" class="form-control" />
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
             <div class="form-group">
 
                 <label asp-for="UserId" class="control-label">
@@ -32,10 +76,23 @@
 
             </div>
 
+            <div class="form-group">
+
+                <input type="submit" class="btn btn-primary" value="Create" />
+
+
+            </div>
+
     </form>
 </div>
 
 <div>
     <a asp-action="Index">Back to order list</a>
 </div>
+@section Scripts
+    {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
+}

@@ -1,120 +1,125 @@
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Localization;
-    using Microsoft.EntityFrameworkCore;
-    using System.Globalization;
-    using WebShop.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using WebShop.Data;
 
-    namespace WebShop
+namespace WebShop
+{
+    public class Program
     {
-        public class Program
+        public static void Main(string[] args)
         {
-            public static void Main(string[] args)
+            var builder = WebApplication.CreateBuilder(args);
+
+            // Add services to the container.
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString));
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+
+                .AddRoles<IdentityRole>()
+
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddControllersWithViews();
+
+            builder.Services.Configure<IdentityOptions>(options =>
             {
-                var builder = WebApplication.CreateBuilder(args);
 
-                // Add services to the container.
-                var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-                builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(connectionString));
-                builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
 
-                builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                
-                    .AddRoles<IdentityRole>()
-                
-                    .AddEntityFrameworkStores<ApplicationDbContext>();
-                builder.Services.AddControllersWithViews();
-
-                builder.Services.Configure<IdentityOptions>(options =>
-                {
-
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireUppercase = false;
-               
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredUniqueChars = 0;
 
 
-                });
+            });
 
-                builder.Services.AddSession();
-
-
-                var app = builder.Build();
-
-                // Configure the HTTP request pipeline.
-                if (app.Environment.IsDevelopment())
-                {
-                    app.UseMigrationsEndPoint();
-                }
-                else
-                {
-                    app.UseExceptionHandler("/Home/Error");
-                    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                    app.UseHsts();
-                }
-
-                app.UseHttpsRedirection();
-                app.UseStaticFiles();
-
-                //decimalni setup
-                var cultureInfo = new CultureInfo("hr-HR");
-                cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
-                cultureInfo.NumberFormat.CurrencyDecimalSeparator = ".";
-
-                app.UseRequestLocalization(new RequestLocalizationOptions
-                
-                
-                    {
-                        DefaultRequestCulture = new RequestCulture(cultureInfo),
-                        SupportedCultures = new List<CultureInfo> { cultureInfo },
-                        SupportedUICultures = new List<CultureInfo> { cultureInfo }
+            builder.Services.AddSession();
 
 
-                    });
+            var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseMigrationsEndPoint();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            //decimalni setup
+            var cultureInfo = new CultureInfo("hr-HR");
+            cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
+            cultureInfo.NumberFormat.CurrencyDecimalSeparator = ".";
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+
+
+            {
+                DefaultRequestCulture = new RequestCulture(cultureInfo),
+                SupportedCultures = new List<CultureInfo> { cultureInfo },
+                SupportedUICultures = new List<CultureInfo> { cultureInfo }
+
+
+            });
 
 
 
 
-                app.UseRouting();
+            app.UseRouting();
 
-                app.UseAuthentication();
-                app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-                using (var scope = app.Services.CreateAsyncScope())
-                {
+            using (var scope = app.Services.CreateAsyncScope())
+            {
 
-                    var userManager = (UserManager<ApplicationUser>)scope.ServiceProvider.GetService(typeof(UserManager<ApplicationUser>));
+                var userManager = (UserManager<ApplicationUser>)scope.ServiceProvider.GetService(typeof(UserManager<ApplicationUser>));
 
 
 
-                    ApplicationUserDbInitializer.SeedUsers(userManager);
+                ApplicationUserDbInitializer.SeedUsers(userManager);
 
-                }
+            }
 
 
 
             app.UseSession();
 
 
-                app.UseEndpoints(endpoints =>
-                {
-                   
+            app.UseEndpoints(endpoints =>
+            {
 
-                    endpoints.MapControllerRoute(
-                      name: "areas",
-                      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                    );
-                });
+              ;
 
 
 
 
 
-                app.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+            });
+
+
+
+
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
 
@@ -124,9 +129,9 @@
 
 
 
-                app.MapRazorPages();
+            app.MapRazorPages();
 
-                app.Run();
-            }
+            app.Run();
         }
     }
+}

@@ -75,6 +75,7 @@ namespace WebShop.Areas.Admin.Controllers
                     Id = orderItem.Id,
                     OrderId = orderItem.OrderId,
                     ProductId = orderItem.ProductId,
+                    ProductTitle = _dbContext.Products.SingleOrDefault(p=> p.Id==orderItem.ProductId).Title,
                     Quantity = orderItem.Quantity,
                     Total = orderItem.Total,
 
@@ -103,6 +104,44 @@ namespace WebShop.Areas.Admin.Controllers
             }).ToList();
             
             return View();
+      
+       
+        
         }
+
+
+        [HttpPost]
+
+        public IActionResult Create(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                _dbContext.Order.Add(order);
+                _dbContext.SaveChanges();
+
+                TempData["Success"] = "Narudžba uspješna!";
+
+
+                return RedirectToAction("Index");
+            }
+
+
+
+
+            ViewBag.Users = _dbContext.Users.Select(u => new SelectListItem()
+            {
+                Value = u.Id.ToString(),
+                Text = u.FirstName + " " + u.LastName,
+            }).ToList();
+
+
+
+
+            return View(order);
+        
+        }
+    
+    
+    
     }
 }

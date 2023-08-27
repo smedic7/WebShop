@@ -16,6 +16,9 @@ namespace WebShop.Models
         [Column(TypeName = "decimal(9,2)")]
         public decimal Total { get; set; }
 
+        [NotMapped]
+        public string? ProductTitle { get; set; }
+
 
 
 

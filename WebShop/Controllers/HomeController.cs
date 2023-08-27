@@ -17,14 +17,14 @@ namespace WebShop.Controllers
 
         private ApplicationDbContext _dbContext;
 
-
+      
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext)
         {
             _logger = logger;
             _dbContext = dbContext;
         }
-
+       
         public IActionResult Index()
         {
             return View();
