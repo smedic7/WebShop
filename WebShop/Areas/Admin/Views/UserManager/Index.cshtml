@@ -1,0 +1,48 @@
+﻿@model List<UserRolesViewModel>
+
+<h1>User roles</h1>
+
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th></th>
+
+        </tr>
+
+
+
+    </thead>
+
+    <tbody>
+
+        @foreach(var user in Model)
+        {
+            <tr>
+
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Email</td>
+                <td>@string.Join(",", user.Roles.ToList())</td>
+
+                <td>
+                    
+                    <a class="btn btn-primary" asp-controller="UserManager" asp-action="Manage" asp-route-userId="@user.UserId">Manage roles
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+        }
+
+
+    </tbody>
+
+</table>

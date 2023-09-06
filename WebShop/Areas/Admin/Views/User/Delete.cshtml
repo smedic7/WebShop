@@ -1,0 +1,31 @@
+﻿﻿@using WebShop.Data
+@model ApplicationUser
+
+<h1>Are you sure about deleting user?</h1>
+
+
+<p>
+    <strong>User ID:</strong> @Model.Id<br />
+    <strong>User Name:</strong> @Model.UserName
+</p>
+
+
+<div>
+
+    <form asp-action="DeleteConfirm">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-controller="User" asp-action="Index" class="btn btn-primary">Cancel</a>
+
+
+    </form>
+
+</div>
+
+    
+    
+    
+    
+    
+    
+    

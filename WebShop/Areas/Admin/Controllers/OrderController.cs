@@ -141,7 +141,105 @@ namespace WebShop.Areas.Admin.Controllers
         
         }
     
-    
-    
+        public IActionResult Edit(int id)
+        {
+            if (id == 0)
+            {
+                return NotFound();
+            }
+
+            Order order = _dbContext.Order.FirstOrDefault(o => o.Id == id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+
+
+            ViewBag.Users = _dbContext.Users.Select(u => new SelectListItem()
+            {
+                Value = u.Id.ToString(),
+                Text = u.FirstName + " " + u.LastName,
+            }).ToList();
+
+
+            return View(order);
+        }
+
+        [HttpPost]
+
+
+
+        public IActionResult Edit(Order order)
+        {
+            if (order == null || order.Id == 0)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _dbContext.Order.Update(order);
+                _dbContext.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(order);
+
+        }
+
+
+
+        public IActionResult Delete(int id)
+        {
+            if (id == 0) 
+            {
+
+                return NotFound();
+
+            }
+               
+
+            var order = _dbContext.Order.FirstOrDefault(o => o.Id == id);
+
+            if (order == null)
+            {
+
+                return NotFound();
+            }
+                
+                
+                
+
+            return View(order);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteConfirm(int id)
+        {
+            if (id == 0)
+            {
+                return NotFound();
+            } 
+                
+                
+                
+            var order = _dbContext.Order.FirstOrDefault(o => o.Id == id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.Remove(order);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
+
     }
 }

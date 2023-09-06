@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IdentityRole
+
+<h1>Edit Role</h1>
+
+<form method="post" asp-action="UpdateRole" asp-controller="RoleManager">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <label for="roleName">Role Name:</label>
+    <input type="text" name="roleName" value="@Model.Name" />
+    <button class="btn btn-primary">Update</button>
+</form>

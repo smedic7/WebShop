@@ -132,6 +132,8 @@
                     Total
                 </th>
 
+              
+
 
             </tr>
         </thead>
@@ -149,6 +151,7 @@
                     <td>
                         @Html.DisplayFor(modelItem=> item.Total)
                     </td>
+                   
                 </tr>
                 
             }
@@ -162,14 +165,10 @@
 
 
 
-
     <div>
-        <a asp-action="NewOrderItem" asp-route-orderId="@Model.Id" class="btn btn-primary">Add order item</a>
-        <div style="margin-top: 5px;"></div>
-
-<div>
+  
             <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Edit</a>
             <a asp-action="Index" class="btn btn-secondary">Back to order list</a>
 </div>
 
-</div>
+
