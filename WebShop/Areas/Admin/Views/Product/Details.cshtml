@@ -30,6 +30,21 @@
     
         </dl>
 
+        <dl class="col-sm-6">
+            @if(string.IsNullOrEmpty(Model.ImageName))
+            {
+            <img decoding="async" src="@("~/images/webshop.JPG")" asp-append-version="true" />
+            }
+
+            else{
+
+            <img decoding="async" src="@("~/images/"+Model.ImageName)" asp-append-version="true"/>
+
+        }
+        
+        </dl>
+
+
 </div>
 
 <div>

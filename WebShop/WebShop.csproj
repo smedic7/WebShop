@@ -29,6 +29,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Data\Migrations\" />
     <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

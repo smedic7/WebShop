@@ -82,6 +82,22 @@ namespace WebShop.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+
+                string wwwRootPath = "wwwroot";
+
+                string fileName = product.ImageFile.FileName;
+
+                product.ImageName = fileName;
+
+                string path = wwwRootPath + "/images/" + fileName;
+
+                using(var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    product.ImageFile.CopyTo(fileStream);
+                }
+                
+                
+                
                 _dbContext.Products.Add(product);
                 _dbContext.SaveChanges();
 

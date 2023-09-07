@@ -22,6 +22,12 @@ namespace WebShop.Models
 
         public decimal Price { get; set; }
 
+
+        public string? ImageName { get; set; }
+
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
+
         [ForeignKey("ProductId")]
         public List<ProductCategory>? ProductsCategories { get; set;}
 

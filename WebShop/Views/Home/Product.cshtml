@@ -33,6 +33,22 @@
         <div class="col-sm-4 mt-3">
             <div class="card">
                 <div class="card-header text-center">
+                    @if (string.IsNullOrEmpty(item.ImageName))
+                    {
+                        <img decoding="async" src="@("~/images/webshop.JPG")" asp-append-version="true" width="150px" height="150px" />
+                    }
+
+                    else
+                    {
+
+                        <img decoding="async" src="@("~/images/"+item.ImageName)" asp-append-version="true" width="150px" height="150px" />
+
+                    }
+                   
+                </div>
+
+
+                <div class="card-header text-center">
                 
                 </div>
                 <div class="card-body">
