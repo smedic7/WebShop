@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using WebShop.Data;
 using WebShop.Models;
 
-namespace WebShop.WebAPI
+namespace WebShop.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/products")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -14,10 +16,8 @@ namespace WebShop.WebAPI
 
         public ProductController(ApplicationDbContext dbContext)
         {
-
             _dbContext = dbContext;
         }
-
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
@@ -26,7 +26,6 @@ namespace WebShop.WebAPI
             return Ok(products);
         }
 
-        
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
@@ -39,9 +38,5 @@ namespace WebShop.WebAPI
 
             return Ok(product);
         }
-
-
-
-
     }
 }
