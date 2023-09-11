@@ -21,7 +21,7 @@ To configure the database connection and initialize the database, please follow 
        "DefaultConnection": "Server=your-server;Database=your-database;User=your-username;Password=your-password;"
    }
 8. Build and run the project
-9. admin user is uid:mirko@miric.hr and password is mirkomiric
+9. admin user is uid:mirko@mirko.hr and password is mirkomiric
 ## Where to get help with your project
 
 If you encounter any issues or need assistance with this project, you can send email to me:
