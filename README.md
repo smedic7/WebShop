@@ -6,22 +6,29 @@ This project is an ASP.NET MVC Core 6 solution that utilizes Microsoft SQL Serve
 
 2. Clone this repository to your local machine:
 3. git clone: https://github.com/smedic7/WebShop.git
-4. Navigate to the project directory:
+4. Navigate to the project directory
 5. Open the solution in your preferred development environment (e.g., Visual Studio, Visual Studio Code)
 6. Configure your database connection string in the `appsettings.json` file.
 7. ### Database Configuration
 
 To configure the database connection and initialize the database, please follow these steps:
 
-1. Open the `appsettings.json` file in the project.
-2. Locate the `ConnectionStrings` section and ensure that the connection string is correctly set up for your database server.
+8. Open the `appsettings.json` file in the project.
+9. Locate the `ConnectionStrings` section and ensure that the connection string is correctly set up for your database server.
 
    ```json
    "ConnectionStrings": {
        "DefaultConnection": "Server=your-server;Database=your-database;User=your-username;Password=your-password;"
    }
-8. Build and run the project
-9. admin user is uid:mirko@mirko.hr and password is mirkomiric
+
+10. Build and run the project
+11. Open package manager console
+12. enter command "update-database" and press enter
+13. after that DB will be created
+14. in VSE run project and press login on web browser to enter admin credentials
+15. admin user is uid:mirko@mirko.hr and password is mirkomiric
+16. on admin dropdown list please choose "Product" and afterwards "Kreiraj novi produkt"
+17. now you are able to create new product with product details
 ## Where to get help with your project
 
 If you encounter any issues or need assistance with this project, you can send email to me:
